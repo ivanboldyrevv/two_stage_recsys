@@ -41,6 +41,9 @@ create table if not exists customers (
     customer_id             serial
 );
 
+alter sequence customers_customer_id_seq restart with 0;
+alter sequence articles_article_id_seq restart with 0;
+
 create table if not exists transactions (
     transaction_uuid uuid primary key,
     t_dat                 date,
