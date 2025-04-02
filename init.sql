@@ -9,6 +9,11 @@ begin
   raise notice 'Starting database initialization...';
 end $$;
 
+create sequence articles_article_id_seq
+  start with 0
+  minvalue 0
+  increment by 1;
+
 create table if not exists articles (
     article_uuid uuid   primary key,
     prod_name           varchar(255),
@@ -27,8 +32,13 @@ create table if not exists articles (
     garment_group_no    int,
     garment_group_name  varchar(255),
     detail_desc         text,
-    article_id          serial
+    article_id          int not null default nextval('articles_article_id_seq')
 );
+
+create sequence customers_customer_id_seq
+  start with 0
+  minvalue 0
+  increment by 1;
 
 create table if not exists customers (
     customer_uuid uuid      primary key,
@@ -38,11 +48,8 @@ create table if not exists customers (
     fashion_news_frequency  varchar(255),
     age                     int,
     postal_code             varchar(255),
-    customer_id             serial
+    customer_id             int not null default nextval('customers_customer_id_seq')
 );
-
-alter sequence customers_customer_id_seq restart with 0;
-alter sequence articles_article_id_seq restart with 0;
 
 create table if not exists transactions (
     transaction_uuid uuid primary key,
