@@ -1,0 +1,20 @@
+mlflow:
+  tracking_uri: "http://localhost:5000"
+  s3_endpoint_url: "http://localhost:9000"
+
+aws:
+  access_key_id: "admin"
+  secret_access_key: "password"
+
+selection_model:
+  name: "ALS_Model"
+
+rerank_model:
+  name: "CatBoost_Model"
+
+models:
+  selection_model_name: "ALS_Model"
+  reranker_model_name: "CatBoost_Model"
+
+db:
+  database_uri: "postgresql+psycopg2://backend:backend@localhost:5432/app_db"
