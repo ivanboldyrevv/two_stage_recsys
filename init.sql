@@ -32,6 +32,7 @@ create table if not exists articles (
     garment_group_no    int,
     garment_group_name  varchar(255),
     detail_desc         text,
+    image_id            int,
     article_id          int not null default nextval('articles_article_id_seq')
 );
 
