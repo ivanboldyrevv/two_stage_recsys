@@ -1,3 +1,37 @@
 # environments
 .venv
 venv/
+
+# training/non-prepared data
+.data
+data/
+
+# docker volumes
+.postgres_data
+postgres_data/
+
+#ide
+.vscode
+
+# python
+__pycache__/
+
+#artifacts
+*/catboost_info
+
+*/plot_artifacts
+
+.mlruns
+/mlruns
+*/mlruns
+
+#s3
+/shared_data
+
+#etc
+*/mypy_cache
+.mypy_cache
+
+#pytest
+*.pytest_cache
+.__pycache__
