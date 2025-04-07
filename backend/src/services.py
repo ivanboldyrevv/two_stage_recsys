@@ -1,4 +1,4 @@
-from typing import Generic, TypeVar, Iterable, Optional
+from typing import Generic, TypeVar, List, Optional
 from uuid import UUID
 
 from repositories import CustomerRepository, ArticleRepository
@@ -47,7 +47,7 @@ class ArticleService(BaseService):
                      page: int,
                      size: int,
                      type_name: Optional[str] = None,
-                     group_name: Optional[str] = None) -> Iterable[Article]:
+                     group_name: Optional[str] = None) -> List[Article]:
         return self.repository.get_articles(
             limit=size,
             offset=page * size,
@@ -55,21 +55,26 @@ class ArticleService(BaseService):
             group_name=group_name
         )
 
+    def get_total_articles(self) -> int:
+        return len(self.repository.get_all())
+
 
 class RecommendationService(BaseService):
     def __init__(self, repository: ArticleRepository, model_url: str) -> None:
         super().__init__(repository)
         self.model_url = model_url
 
-    def get_recommendation(self, customer_uuid: UUID):
-        response = requests.get(f"{self.model_url}/{customer_uuid}")
+    def get_recommendation(self, customer_uuid: UUID) -> List[Article]:
+        response = requests.get(f"{self.model_url}/get_recommendations/{customer_uuid}")
         uuids = response.json()["articles"]
 
-        detailed = []
+        result = []
 
         for uuid in uuids:
             article = self.get_article_by_uuid(uuid)
-            article.image_bytes = self.image_service.get_image(article.image_id)
-            detailed.append(article)
+            result.append(article)
 
-        return detailed
+        return result
+
+    def get_article_by_uuid(self, article_uuid: UUID) -> Article:
+        return self.repository.get_by_uuid(article_uuid, "article_uuid")
