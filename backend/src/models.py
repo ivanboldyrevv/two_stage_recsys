@@ -1,4 +1,10 @@
-from sqlalchemy import Column, Integer, UUID, VARCHAR, Text
+from sqlalchemy import (Column,
+                        Integer,
+                        UUID,
+                        VARCHAR,
+                        Text,
+                        DateTime,
+                        ForeignKey)
 
 from database import Base
 
@@ -19,3 +25,12 @@ class Article(Base):
     product_group_name = Column(VARCHAR)
     detail_desc = Column(Text)
     image_id = Column(Integer)
+
+
+class Transaction(Base):
+    __tablename__ = "transactions"
+
+    transaction_uuid = Column(UUID, primary_key=True)
+    t_dat = Column(DateTime)
+    customer_uuid = ForeignKey(UUID)
+    article_uuid = ForeignKey(UUID)
