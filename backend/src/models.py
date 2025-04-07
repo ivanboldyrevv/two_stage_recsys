@@ -32,5 +32,5 @@ class Transaction(Base):
 
     transaction_uuid = Column(UUID, primary_key=True)
     t_dat = Column(DateTime)
-    customer_uuid = ForeignKey(UUID)
-    article_uuid = ForeignKey(UUID)
+    customer_uuid = Column(UUID, ForeignKey(Customer.customer_uuid))
+    article_uuid = Column(UUID, ForeignKey(Article.article_uuid))
