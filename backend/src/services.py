@@ -81,3 +81,14 @@ class RecommendationService(BaseService[ArticleRepository]):
 
     def get_article_by_uuid(self, article_uuid: UUID) -> Article:
         return self.repository.get_by_uuid(article_uuid, "article_uuid")
+
+
+class TransactionService(BaseService[TransactionRepository]):
+    def __init__(self, repository: TransactionRepository) -> None:
+        super().__init__(repository)
+
+    def insert_transaction(self, customer_uuid: UUID, article_uuid: UUID) -> Transaction:
+        return self.repository.insert_transaction(customer_uuid, article_uuid)
+
+    def get_customer_transactions(self, customer_uuid: UUID) -> List[Transaction]:
+        return self.repository.get_customer_transaction(customer_uuid)
