@@ -1,10 +1,13 @@
 from typing import Generic, TypeVar, List, Optional
 from uuid import UUID
 
-from repositories import CustomerRepository, ArticleRepository
+from repositories import (CustomerRepository,
+                          ArticleRepository,
+                          TransactionRepository)
+
 from s3interface import S3interface
 
-from models import Customer, Article
+from models import Customer, Article, Transaction
 
 import random
 import requests
@@ -25,7 +28,7 @@ class ImageService:
         return self.s3.get_image(image_id)
 
 
-class CustomerService(BaseService):
+class CustomerService(BaseService[CustomerRepository]):
     def __init__(self, repository: CustomerRepository) -> None:
         super().__init__(repository)
 
@@ -36,7 +39,7 @@ class CustomerService(BaseService):
         return random.choice(customers)
 
 
-class ArticleService(BaseService):
+class ArticleService(BaseService[ArticleRepository]):
     def __init__(self, repository: ArticleRepository) -> None:
         super().__init__(repository)
 
@@ -59,7 +62,7 @@ class ArticleService(BaseService):
         return len(self.repository.get_all())
 
 
-class RecommendationService(BaseService):
+class RecommendationService(BaseService[ArticleRepository]):
     def __init__(self, repository: ArticleRepository, model_url: str) -> None:
         super().__init__(repository)
         self.model_url = model_url
