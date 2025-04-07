@@ -35,6 +35,11 @@ class Container(containers.DeclarativeContainer):
         session_factory=db.provided.session
     )
 
+    transaction_repository = providers.Factory(
+        repositories.TransactionRepository,
+        session_factory=db.provided.session
+    )
+
     image_service = providers.Factory(
         services.ImageService,
         s3_interface=s3_interface
@@ -54,4 +59,9 @@ class Container(containers.DeclarativeContainer):
         services.RecommendationService,
         repository=article_repository,
         model_url=config.model.url
+    )
+
+    transaction_service = providers.Factory(
+        services.TransactionService,
+        repository=transaction_repository
     )

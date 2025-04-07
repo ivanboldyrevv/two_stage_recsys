@@ -1,6 +1,8 @@
 from transport.articles import articles
 from transport.recs import recs
 from transport.customers import customer
+from transport.transactions import transaction
+
 from containers import Container
 
 from fastapi import FastAPI
@@ -19,6 +21,7 @@ def create_app() -> FastAPI:
     app.include_router(customer, prefix="/customer")
     app.include_router(articles, prefix="/articles")
     app.include_router(recs, prefix="/recs")
+    app.include_router(transaction, prefix="/transaction")
 
     app.container = container
 
