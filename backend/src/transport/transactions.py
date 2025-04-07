@@ -2,7 +2,7 @@ from uuid import UUID
 from typing import Annotated
 
 from fastapi import APIRouter, Depends
-from responses import Transactions
+from .responses import Transactions, Transaction
 
 from services import TransactionService
 from containers import Container
@@ -16,10 +16,10 @@ transaction = APIRouter()
 @inject
 def get_transactions(service: Annotated[TransactionService, Depends(Provide[Container.transaction_service])],
                      customer_uuid: UUID):
-    return service.get_customer_transactions(customer_uuid)
+    return {"data": service.get_customer_transactions(customer_uuid)}
 
 
-@transaction.post("/{customer_uuid}", response_model=Transactions)
+@transaction.post("/{customer_uuid}", response_model=Transaction)
 @inject
 def insert_transactions(service: Annotated[TransactionService, Depends(Provide[Container.transaction_service])],
                         customer_uuid: UUID,
