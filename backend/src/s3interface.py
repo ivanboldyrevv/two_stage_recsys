@@ -39,7 +39,6 @@ class S3interface:
         padded_id = image_id.zfill(len(image_id) + 1)
         prefix = padded_id[:3]
         filename = f"{padded_id}.jpg"
-        print(posixpath.join(prefix, filename))
         return posixpath.join(prefix, filename)
 
     @property
