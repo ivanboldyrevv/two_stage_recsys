@@ -6,21 +6,40 @@ from containers import Container
 
 from fastapi import APIRouter, Depends, Response
 
+from .responses import Articles
 
-article = APIRouter()
+
+articles = APIRouter()
 
 
-@article.get("/{page}/{size}")
+@articles.get("/", response_model=Articles)
 @inject
 def get_articles(service: Annotated[ArticleService, Depends(Provide[Container.article_service])],
                  page: int,
                  size: int,
                  type_name: Optional[str] = None,
                  group_name: Optional[str] = None):
-    return service.get_articles(page, size, type_name, group_name)
+    return {
+        "data": service.get_articles(page, size, type_name, group_name),
+        "total_pages": int(service.get_total_articles(type_name, group_name) / size),
+        "current_page": page,
+        "page_size": size
+    }
 
 
-@article.get("/{image_id}")
+@articles.get("/types")
+@inject
+def get_types(service: Annotated[ArticleService, Depends(Provide[Container.article_service])]):
+    return service.get_product_types()
+
+
+@articles.get("/groups")
+@inject
+def get_groups(service: Annotated[ArticleService, Depends(Provide[Container.article_service])]):
+    return service.get_product_groups()
+
+
+@articles.get("/image")
 @inject
 def get_image(service: Annotated[ImageService, Depends(Provide[Container.image_service])],
               image_id: int):
