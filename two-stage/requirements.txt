@@ -1,0 +1,10 @@
+boto3==1.37.24
+dependency-injector==4.46.0
+fastapi[standard]==0.115.12
+pytest==8.3.5
+SQLAlchemy==2.0.39
+requests==2.32.3
+psycopg2-binary==2.9.10
+mlflow==2.21.2
+catboost==1.2.7
+implicit==0.7.2

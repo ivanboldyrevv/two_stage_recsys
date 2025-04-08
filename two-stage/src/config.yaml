@@ -1,6 +1,6 @@
 mlflow:
-  tracking_uri: "http://localhost:5000"
-  s3_endpoint_url: "http://localhost:9000"
+  tracking_uri: "http://mlflow:5000"
+  s3_endpoint_url: "http://minio:9000"
 
 aws:
   access_key_id: "admin"
@@ -17,4 +17,4 @@ models:
   reranker_model_name: "CatBoost_Model"
 
 db:
-  database_uri: "postgresql+psycopg2://backend:backend@localhost:5432/app_db"
+  database_uri: "postgresql+psycopg2://backend:backend@postgres:5432/app_db"
