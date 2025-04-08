@@ -64,8 +64,17 @@ class ArticleService(BaseService[ArticleRepository]):
     def get_product_groups(self) -> List[str]:
         return self.repository.get_product_groups()
 
-    def get_total_articles(self) -> int:
-        return len(self.repository.get_all())
+    def get_total_articles(self,
+                           type_name: Optional[str] = None,
+                           group_name: Optional[str] = None) -> int:
+        articles = self.repository.get_all()
+
+        if type_name:
+            articles = list(filter(lambda x: x.product_type_name == type_name, articles))
+        if group_name:
+            articles = list(filter(lambda x: x.product_group_name == group_name, articles))
+
+        return len(articles)
 
 
 class RecommendationService(BaseService[ArticleRepository]):
