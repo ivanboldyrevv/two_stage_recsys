@@ -9,7 +9,7 @@ from fastapi import APIRouter, Depends
 customer = APIRouter()
 
 
-@customer.get("/random_user")
+@customer.get("/random")
 @inject
 def get_random_user(service: Annotated[CustomerService, Depends(Provide[Container.customer_service])],
                     random_seed: Optional[int] = None):
