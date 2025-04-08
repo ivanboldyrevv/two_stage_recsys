@@ -1,9 +1,11 @@
 import { useEffect } from "react";
+import config from "../config";
+
 
 const fetchArticleTypes = (setTypes) => {
     useEffect(() => {
         const fetchTypes = async () => {
-            const url = "http://localhost:5556/articles/types";
+            const url = `${config.api.baseUrl}/articles/types`;
             const response = await fetch(url);
             const data = await response.json();
 
@@ -20,7 +22,7 @@ const fetchArticleTypes = (setTypes) => {
 
 const fetchGroups = (setGroup) => {
     const fetchData = async () => {
-        const url = "http://localhost:5556/articles/groups";
+        const url = `${config.api.baseUrl}/articles/groups`;
         const response = await fetch(url);
         const data = await response.json();
 

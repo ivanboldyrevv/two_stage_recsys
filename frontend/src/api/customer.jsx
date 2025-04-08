@@ -1,3 +1,5 @@
+import config from "../config"
+
 
 const useCustomer = (setCustomer, randomSeed) => {
     const fetchCustomer = async () => {
@@ -11,7 +13,7 @@ const useCustomer = (setCustomer, randomSeed) => {
         )
 
         const queryString = new URLSearchParams(filteredParams).toString()
-        const articlesUrl = `http://localhost:5556/customer/random?${queryString}`
+        const articlesUrl = `${config.api.baseUrl}/customer/random?${queryString}`
 
         const response = await fetch(articlesUrl)
         const data = await response.json()

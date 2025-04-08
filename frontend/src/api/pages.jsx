@@ -1,3 +1,6 @@
+import config from "../config"
+
+
 const usePages = (setPage, setTotalPages, pageNumber, pageSize, typeName, groupName) => {
     const fetchArticles = async () => {
       try {
@@ -14,7 +17,7 @@ const usePages = (setPage, setTotalPages, pageNumber, pageSize, typeName, groupN
         )
 
         const queryString = new URLSearchParams(filteredParams).toString()
-        const articlesUrl = `http://localhost:5556/articles?${queryString}`
+        const articlesUrl = `${config.api.baseUrl}/articles?${queryString}`
 
         const articlesResponse = await fetch(articlesUrl)
         if (!articlesResponse.ok) throw new Error("Articles request failed")
@@ -24,7 +27,7 @@ const usePages = (setPage, setTotalPages, pageNumber, pageSize, typeName, groupN
         const articlesWithImages = await Promise.all(
           articlesPageData.data.map(async article => {
             try {
-              const imageUrl = `http://localhost:5556/articles/image?image_id=${article.image_id}`
+              const imageUrl = `${config.api.baseUrl}/articles/image?image_id=${article.image_id}`
               const imageResponse = await fetch(imageUrl)
               
               if (!imageResponse.ok) throw new Error("Image request failed")

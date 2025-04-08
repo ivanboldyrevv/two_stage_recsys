@@ -1,4 +1,5 @@
-import { useEffect } from "react"
+import config from "../config"
+
 
 const useRecs = (customerUUID, setRecsContent) => {
     const fetchArticles = async () => {
@@ -13,7 +14,7 @@ const useRecs = (customerUUID, setRecsContent) => {
         )
 
         const queryString = new URLSearchParams(filteredParams).toString()
-        const recsUrl = `http://localhost:5556/recs/two_stage?${queryString}`
+        const recsUrl = `${config.api.baseUrl}/recs/two_stage?${queryString}`
 
         const response = await fetch(recsUrl)
         if (!response.ok) throw new Error("Recommendation's request failed")
@@ -23,7 +24,7 @@ const useRecs = (customerUUID, setRecsContent) => {
         const detailedData = await Promise.all(
             recsData.map(async article => {
             try {
-              const imageUrl = `http://localhost:5556/articles/image?image_id=${article.image_id}`
+              const imageUrl = `${config.api.baseUrl}/articles/image?image_id=${article.image_id}`
               const imageResponse = await fetch(imageUrl)
               
               if (!imageResponse.ok) throw new Error("Image request failed")
