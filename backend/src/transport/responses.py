@@ -1,6 +1,6 @@
 from typing import List
 from uuid import UUID
-from datetime import datetime
+from datetime import date
 from pydantic import BaseModel
 
 
@@ -24,7 +24,7 @@ class Transaction(BaseModel):
     transaction_uuid: UUID
     customer_uuid: UUID
     article_uuid: UUID
-    t_dat: datetime
+    t_dat: date
 
 
 class Transactions(BaseModel):
