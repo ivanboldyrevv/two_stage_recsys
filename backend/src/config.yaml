@@ -1,11 +1,11 @@
 s3:
-  endpoint_url: "http://localhost:9000"
+  endpoint_url: "http://minio:9000"
   access_key: "admin"
   secret_key: "password"
   bucket_name: "images"
 
 db:
-  uri: "postgresql+psycopg2://backend:backend@localhost:5432/app_db"
+  uri: "postgresql+psycopg2://backend:backend@postgres:5432/app_db"
 
 model:
   url: "http://localhost:5555"
