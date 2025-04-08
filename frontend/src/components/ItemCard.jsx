@@ -1,14 +1,8 @@
-const testImageUrl = "https://image.hm.com/assets/hm/3a/74/3a7465ed33c6b9134f400343210286dae45652b5.jpg?imwidth=2160";
-const testCategoryName = "jeans";
-const testItemName = "mommy jeans";
+import React from "react";
 
-const ItemCard = ({imgUrl, itemCategory, itemName}) => {
-    const handleClick = () => {
-        console.log(1);
-    }
-
+const ItemCard = ({uuid, imgUrl, itemCategory, itemName, handleClick}) => {
     return (
-        <div className="item-card" onClick={handleClick}>
+        <div className="item-card" onClick={() => handleClick(uuid)}>
             <div className="item-image">
                 <img src={imgUrl} width={120}/>
             </div>
