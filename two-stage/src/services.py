@@ -24,8 +24,10 @@ class Service:
         self.sparse_matrix = unwrapped_selection_model.sparse_matrix
 
     def get_recommendation(self, customer_uuid: UUID, N: int = 10):
+        # TEST N CANDIDATES
+        n_candidates = 1000
         # Step 1: match candidates
-        candidates = self._select_candidates(customer_uuid, N)
+        candidates = self._select_candidates(customer_uuid, n_candidates)
         # Step 2: prepare data for rerank inference
         candidates_features = self._prepare_reranking_features(customer_uuid, candidates)
         # Step 3: rerank candidates
