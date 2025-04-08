@@ -58,6 +58,12 @@ class ArticleService(BaseService[ArticleRepository]):
             group_name=group_name
         )
 
+    def get_product_types(self) -> List[str]:
+        return self.repository.get_product_types()
+
+    def get_product_groups(self) -> List[str]:
+        return self.repository.get_product_groups()
+
     def get_total_articles(self) -> int:
         return len(self.repository.get_all())
 

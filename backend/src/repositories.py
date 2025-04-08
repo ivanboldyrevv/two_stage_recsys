@@ -58,6 +58,24 @@ class ArticleRepository(Repository[Article]):
 
             return articles
 
+    def get_product_types(self) -> List[str]:
+        with self.session_factory() as session:
+            categories = session.query(Article.product_type_name).distinct().all()
+
+            if not categories:
+                raise NotFoundError(Article.__name__, "product_type_name")
+
+        return [entity.product_type_name for entity in categories]
+
+    def get_product_groups(self) -> List[str]:
+        with self.session_factory() as session:
+            categories = session.query(Article.product_group_name).distinct().all()
+
+            if not categories:
+                raise NotFoundError(Article.__name__, "product_group_name")
+
+        return [entity.product_group_name for entity in categories]
+
 
 class TransactionRepository(Repository[Transaction]):
     def __init__(self, session_factory: Callable[..., AbstractContextManager[Session]]) -> None:
