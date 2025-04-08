@@ -51,6 +51,18 @@ services:
     ports:
       - "5000:5000"
   
+  model:
+    container_name: recsys-model
+    build:
+      context: ./two-stage/
+    restart: always
+    depends_on:
+      - postgres
+      - minio
+      - mlflow
+    ports:
+      - "5555:5555"
+
   backend:
     container_name: recsys-backend
     build:
@@ -60,6 +72,7 @@ services:
       - postgres
       - minio
       - mlflow
+      - model
     ports:
      - "5556:5556"
 
