@@ -75,6 +75,16 @@ services:
       - model
     ports:
      - "5556:5556"
+    
+  frontend:
+    container_name: recsys-frontend
+    build:
+      context: ./frontend/
+    restart: always
+    depends_on:
+     - backend
+    ports:
+     - "3000:80"
 
 volumes:
   postgres_data:
