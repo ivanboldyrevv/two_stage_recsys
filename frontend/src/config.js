@@ -1,6 +1,6 @@
 const config = {
     api: {
-        baseUrl: "http://backend:5556"
+        baseUrl: "http://localhost:5556"
     }
 }
 

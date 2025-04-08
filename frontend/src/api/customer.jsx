@@ -1,6 +1,5 @@
 import config from "../config"
 
-
 const useCustomer = (setCustomer, randomSeed) => {
     const fetchCustomer = async () => {
             
