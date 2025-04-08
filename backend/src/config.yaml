@@ -8,4 +8,4 @@ db:
   uri: "postgresql+psycopg2://backend:backend@postgres:5432/app_db"
 
 model:
-  url: "http://localhost:5555"
+  url: "http://model:5555"
